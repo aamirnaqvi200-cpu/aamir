@@ -19,11 +19,11 @@ gsap.registerPlugin(ScrollTrigger);
 // Check if device is mobile
 const isMobile = () => window.innerWidth < 768;
 const mobileImages = [
-  { src: '/mobile/mbname.png', delay: 2, isStatic: false, zIndex: 16 },
-  { src: '/mobile/7.png', delay: 1.6, isStatic: false, zIndex: 15 },
-  { src: '/mobile/mb5-6.png', delay: 1.8, isStatic: false, zIndex: 14 },
-  { src: '/mobile/mb3-4.png', delay: 1.9, isStatic: false, zIndex: 13 },
-  { src: '/mobile/mb1-2.png', delay: 2.1, isStatic: false, zIndex: 12 },
+  { src: '/mobile/mbname.webp', delay: 2, isStatic: false, zIndex: 16 },
+  { src: '/mobile/7.webp', delay: 1.6, isStatic: false, zIndex: 15 },
+  { src: '/mobile/mb5-6.webp', delay: 1.8, isStatic: false, zIndex: 14 },
+  { src: '/mobile/mb3-4.webp', delay: 1.9, isStatic: false, zIndex: 13 },
+  { src: '/mobile/mb1-2.webp', delay: 2.1, isStatic: false, zIndex: 12 },
   { src: '/mobile/mbme.webp', delay: 2.2, isStatic: false, zIndex: 11 },
   { src: '/mobile/mobile bg.webp', isStatic: true, zIndex: 10 },
 ];
@@ -31,11 +31,11 @@ const mobileImages = [
 const desktopImages = [ 
   { src: '/pc/me.webp', delay: 1.2, isStatic: true },
   { src: '/pc/me 2.webp', delay: 1.4, isStatic: true },
-  { src: '/pc/5-6.png', delay: 2.2},
-  { src: '/pc/3-4.png', delay: 1.9 },
-  { src: '/pc/1-2.png', delay: 1.0, isStatic: true}, 
-  { src: '/pc/7.png', delay: 1.2, isStatic: true },
-  { src: '/pc/name.png', delay: 2  }, 
+  { src: '/pc/5-6.webp', delay: 2.2},
+  { src: '/pc/3-4.webp', delay: 1.9 },
+  { src: '/pc/1-2.webp', delay: 1.0, isStatic: true}, 
+  { src: '/pc/7.webp', delay: 1.2, isStatic: true },
+  { src: '/pc/name.webp', delay: 2  }, 
  
 ];
 
