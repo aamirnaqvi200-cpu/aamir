@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Maximize2, X, Play, Pause, Volume2, VolumeX } from "lucide-react";
 import { thumbnailLoadQueue } from "../utils/thumbnailLoadQueue";
+import { videoAutoplayQueue } from "../utils/videoAutoplayQueue";
 
 const isMobile = () => window.innerWidth < 768;
 
@@ -105,20 +106,23 @@ export function VideoThumbnail({
           setIsInView(true);
           observer.disconnect();
 
-          // Auto-play for non-showreel videos after a short delay to ensure video element is ready
+          // Auto-play for non-showreel videos using staggered queue
           if (!isShowreel) {
-            setTimeout(() => {
+            videoAutoplayQueue.add(async () => {
               if (videoRef.current) {
                 setIsLoading(true);
                 videoRef.current.src = src;
                 videoRef.current.muted = true;
                 videoRef.current.load();
-                videoRef.current.play().catch((error) => {
+
+                try {
+                  await videoRef.current.play();
+                } catch (error) {
                   console.error('Error auto-playing video:', error);
                   setIsLoading(false);
-                });
+                }
               }
-            }, 100);
+            });
           }
         }
       },
