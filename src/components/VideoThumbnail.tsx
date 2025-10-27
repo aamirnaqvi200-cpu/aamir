@@ -100,6 +100,17 @@ export function VideoThumbnail({
     const container = containerRef.current;
     if (!container) return;
 
+    // Load video immediately for non-showreel videos
+    if (!isShowreel && videoRef.current && !videoLoaded) {
+      videoAutoplayQueue.add(async () => {
+        if (videoRef.current) {
+          videoRef.current.src = src;
+          videoRef.current.muted = true;
+          videoRef.current.load();
+        }
+      });
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -111,9 +122,6 @@ export function VideoThumbnail({
             videoAutoplayQueue.add(async () => {
               if (videoRef.current) {
                 setIsLoading(true);
-                videoRef.current.src = src;
-                videoRef.current.muted = true;
-                videoRef.current.load();
 
                 try {
                   await videoRef.current.play();
@@ -135,7 +143,7 @@ export function VideoThumbnail({
     observer.observe(container);
 
     return () => observer.disconnect();
-  }, [isShowreel, src]);
+  }, [isShowreel, src, videoLoaded]);
 
   const handleClick = async () => {
     if (!videoRef.current) return;
@@ -210,55 +218,53 @@ export function VideoThumbnail({
         />
       )}
 
-      {/* Video element */}
-      {isInView && (
-        <video
-          ref={videoRef}
-          className={`absolute inset-0 w-full h-full ${
-            isFullscreen ? 'object-contain' : 'object-cover'
-          } transition-opacity duration-300 ${
-            hasStartedPlaying ? 'opacity-100' : 'opacity-0'
-          }`}
-          loop
-          playsInline
-          preload="none"
-          muted={isMuted}
-          onLoadedData={() => {
-            console.log('Video loaded data');
-            setVideoLoaded(true);
-          }}
-          onPlay={() => {
-            console.log('Video started playing');
-            setIsPlaying(true);
-            setHasStartedPlaying(true);
-            setIsLoading(false);
-          }}
-          onPause={() => setIsPlaying(false)}
-          onEnded={() => setIsPlaying(false)}
-          onLoadStart={() => {
-            console.log('Video load started');
-          }}
-          onCanPlay={() => {
-            console.log('Video can play');
-          }}
-          onTimeUpdate={() => {
-            if (videoRef.current && !isDragging) {
-              setCurrentTime(videoRef.current.currentTime);
-            }
-          }}
-          onLoadedMetadata={() => {
-            if (videoRef.current) {
-              setDuration(videoRef.current.duration);
-            }
-          }}
-          onError={() => {
-            console.log('Video error occurred');
-            setIsLoading(false);
-            setIsPlaying(false);
-            console.error('Video failed to load:', src);
-          }}
-        />
-      )}
+      {/* Video element - always render to allow preloading */}
+      <video
+        ref={videoRef}
+        className={`absolute inset-0 w-full h-full ${
+          isFullscreen ? 'object-contain' : 'object-cover'
+        } transition-opacity duration-300 ${
+          hasStartedPlaying ? 'opacity-100' : 'opacity-0'
+        }`}
+        loop
+        playsInline
+        preload="auto"
+        muted={isMuted}
+        onLoadedData={() => {
+          console.log('Video loaded data');
+          setVideoLoaded(true);
+        }}
+        onPlay={() => {
+          console.log('Video started playing');
+          setIsPlaying(true);
+          setHasStartedPlaying(true);
+          setIsLoading(false);
+        }}
+        onPause={() => setIsPlaying(false)}
+        onEnded={() => setIsPlaying(false)}
+        onLoadStart={() => {
+          console.log('Video load started');
+        }}
+        onCanPlay={() => {
+          console.log('Video can play');
+        }}
+        onTimeUpdate={() => {
+          if (videoRef.current && !isDragging) {
+            setCurrentTime(videoRef.current.currentTime);
+          }
+        }}
+        onLoadedMetadata={() => {
+          if (videoRef.current) {
+            setDuration(videoRef.current.duration);
+          }
+        }}
+        onError={() => {
+          console.log('Video error occurred');
+          setIsLoading(false);
+          setIsPlaying(false);
+          console.error('Video failed to load:', src);
+        }}
+      />
 
       {/* Fallback background when thumbnail is loading or not available */}
       {(!thumbnailLoaded && !thumbnailPath) && (
