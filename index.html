@@ -6,43 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Aamir Naqvi</title>
 
-    <!-- Preload critical fonts -->
+    <!-- Preconnect to font origins for faster loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Anton&display=swap">
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wdth@0,75;1,75&display=swap">
-    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wdth@0,75;1,75&display=swap" rel="stylesheet">
 
-    <!-- Preload critical images -->
+    <!-- Preload critical images only -->
     <link rel="preload" as="image" href="/pc/bg.webp" media="(min-width: 768px)">
     <link rel="preload" as="image" href="/mobile/mobile bg.webp" media="(max-width: 767px)">
     <link rel="preload" as="image" href="/pc/me.webp" media="(min-width: 768px)">
     <link rel="preload" as="image" href="/mobile/mbme.webp" media="(max-width: 767px)">
-    <link rel="preload" as="image" href="/pc/name.png" media="(min-width: 768px)">
-    <link rel="preload" as="image" href="/mobile/mbname.png" media="(max-width: 767px)">
-
-    <!-- Preload all thumbnails -->
-    <link rel="preload" as="image" href="/thumbnails/2.jpg">
-    <link rel="preload" as="image" href="/thumbnails/3.jpg">
-    <link rel="preload" as="image" href="/thumbnails/4.jpg">
-    <link rel="preload" as="image" href="/thumbnails/5.jpg">
-    <link rel="preload" as="image" href="/thumbnails/6.jpg">
-    <link rel="preload" as="image" href="/thumbnails/7.jpg">
-    <link rel="preload" as="image" href="/thumbnails/8.jpg">
-    <link rel="preload" as="image" href="/thumbnails/9.jpg">
-    <link rel="preload" as="image" href="/thumbnails/10.jpg">
-    <link rel="preload" as="image" href="/thumbnails/11.jpg">
-    <link rel="preload" as="image" href="/thumbnails/12.jpg">
-    <link rel="preload" as="image" href="/thumbnails/13.jpg">
-    <link rel="preload" as="image" href="/thumbnails/14.jpg">
-    <link rel="preload" as="image" href="/thumbnails/15.jpg">
-    <link rel="preload" as="image" href="/thumbnails/16.jpg">
-    <link rel="preload" as="image" href="/thumbnails/17.jpg">
-    <link rel="preload" as="image" href="/thumbnails/18.jpg">
-    <link rel="preload" as="image" href="/thumbnails/19.jpg">
-    <link rel="preload" as="image" href="/thumbnails/21.jpg">
-    <link rel="preload" as="image" href="/thumbnails/22.jpg">
 
     <!-- Critical CSS inline -->
     <style>
@@ -62,6 +34,14 @@
         -moz-osx-font-smoothing: grayscale;
       }
     </style>
+
+    <!-- Load fonts asynchronously to prevent render blocking -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&display=swap" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wdth@0,75;1,75&display=swap" media="print" onload="this.media='all'">
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wdth@0,75;1,75&display=swap" rel="stylesheet">
+    </noscript>
 
   </head>
   <body>
